@@ -29,3 +29,5 @@ class SaleListStorage {
     });
   }
 }
+
+export default SaleListStorage;
