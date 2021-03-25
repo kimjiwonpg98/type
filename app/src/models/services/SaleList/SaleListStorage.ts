@@ -1,16 +1,15 @@
-import db from '../../../config/db';
+import db from "../../../config/db";
 
 interface saleLists {
-  num?: number,
-  thumbnail?: string,
-  title?: string,
-  hit?: number,
-  price?: string,
-  name?: string,
-  commentCount?: number,
-  inDate?: Date
+  num?: number;
+  thumbnail?: string;
+  title?: string;
+  hit?: number;
+  price?: string;
+  name?: string;
+  commentCount?: number;
+  inDate?: Date;
 }
-
 
 class SaleListStorage {
   static findAllByStatus(id: string) {
@@ -24,12 +23,11 @@ class SaleListStorage {
       WHERE status = 2 AND student_id = ?`;
 
       db.query(sql, [id], (err, saleLists: Array<any>) => {
-        if(err) reject(err);
+        if (err) reject(err);
         else resolve(saleLists);
-        });
-      })
-    }
+      });
+    });
   }
-
+}
 
 export default SaleListStorage;

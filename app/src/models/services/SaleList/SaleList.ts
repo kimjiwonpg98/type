@@ -1,9 +1,9 @@
 import SaleListStorage from "./SaleListStorage";
 
 interface response {
-  success: boolean,
-  msg: string,
-  saleLists?: any
+  success: boolean;
+  msg: string;
+  saleLists?: any;
 }
 
 class SaleList {
@@ -22,7 +22,7 @@ class SaleList {
           msg: "판매내역 조회 완료되었습니다.",
           saleLists: saleLists,
         };
-        return {success: false, msg: "판매내역이 존재하지않습니다."};
+      return { success: false, msg: "판매내역이 존재하지않습니다." };
     } catch (err) {
       throw err;
     }
