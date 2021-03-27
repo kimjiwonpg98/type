@@ -12,7 +12,9 @@ app.use(express.static(`${__dirname}/src/public`));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(morgan("tiny", { stream: { write: (message) => logger.info(message) } }));
+app.use(
+  morgan("tiny", { stream: { write: (message) => logger.info(message) } })
+);
 
 import sale from "./apis/sale-list";
 
