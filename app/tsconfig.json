@@ -6,6 +6,8 @@
     "outDir": "./dist",
     "strict": true
   },
+  "compileOnSave": true,
+  "buildOnSave": true,
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
 }

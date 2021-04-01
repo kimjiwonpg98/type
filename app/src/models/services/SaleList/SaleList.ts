@@ -1,21 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import * as express from "express";
+import { RowDataPacket } from "mysql2";
 import SaleListStorage from "./SaleListStorage";
+import Error from "../../utils/Error";
+
+interface error {
+  isError: boolean;
+  errMsg: any;
+  clientMsg: string;
+}
 
 interface response {
   success: boolean;
   msg: string;
-  saleLists?: any;
+  saleLists?: RowDataPacket[];
 }
 
 class SaleList {
-  constructor(readonly body: string) {
-    this.body = body;
+  params: any;
+  constructor(readonly req: express.Request) {
+    this.params = req.params;
   }
 
-  async read(): Promise<response> {
-    const studentId: string = this.body;
+  async read(): Promise<response | error> {
+    const studentId: string = this.params.studentId;
 
     try {
-      const saleLists: Array<any> = await SaleListStorage.findAllByStatus(studentId);
+      const saleLists = await SaleListStorage.findAllByStatus(studentId);
       if (saleLists.length !== 0)
         return {
           success: true,
@@ -24,7 +35,7 @@ class SaleList {
         };
       return { success: false, msg: "판매내역이 존재하지않습니다." };
     } catch (err) {
-      throw err;
+      return Error.ctrl("서버측 문제", err);
     }
   }
 }
