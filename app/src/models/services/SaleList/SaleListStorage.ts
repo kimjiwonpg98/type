@@ -1,22 +1,26 @@
 import { RowDataPacket } from "mysql2";
 import db from "../../../config/db";
 
-// interface saleLists {
-//   num: number;
-//   sellerName: string;
-//   profilePath: string;
-//   thumbnail: string;
-//   title: string;
-//   hit: number;
-//   price: string;
-//   categoryName: string;
-//   commentCount: number;
-//   inDate: Date;
-// }
+interface Test {
+  TextRow: saleLists;
+}
+
+interface saleLists {
+  num: number;
+  sellerId: string;
+  sellerName: string;
+  profilePath: string;
+  thumbnail: string;
+  title: string;
+  hit: number;
+  price: string;
+  categoryName: string;
+  commentCount: number;
+  inDate: Date;
+}
 
 class SaleListStorage {
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static findAllByStatus(id: string): Promise<RowDataPacket[]> {
+  static findAllByStatus(id: string): Promise<Test[]> {
     return new Promise((resolve, reject) => {
       const sql = `SELECT bo.no AS num, bo.student_id AS sellerId, st.nickname AS sellerName, st.profile_path AS profilePath, 
       bo.thumbnail, bo.title, bo.hit, 

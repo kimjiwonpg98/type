@@ -1,19 +1,31 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
-import { RowDataPacket } from "mysql2";
 import SaleListStorage from "./SaleListStorage";
 import Error from "../../utils/Error";
 
+interface saleLists {
+  num: number;
+  sellerName: string;
+  profilePath: string;
+  thumbnail: string;
+  title: string;
+  hit: number;
+  price: string;
+  categoryName: string;
+  commentCount: number;
+  inDate: Date;
+}
+
 interface error {
   isError: boolean;
-  errMsg: any;
+  errMsg: string;
   clientMsg: string;
 }
 
 interface response {
   success: boolean;
   msg: string;
-  saleLists?: RowDataPacket[];
+  saleLists?: saleLists[];
 }
 
 class SaleList {

@@ -1,4 +1,4 @@
-import { RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import db from "../../../config/db";
 
 type client = {
@@ -52,7 +52,7 @@ class PurchaseListStorage {
     });
   }
 
-  static findNicknameById(client: client): Promise<RowDataPacket[]> {
+  static findNicknameById(client: client): Promise<string> {
     return new Promise((resolve, reject) => {
       const sql = `SELECT st.id
       FROM students st
@@ -60,18 +60,18 @@ class PurchaseListStorage {
 
       db.query(sql, [client.nickname], (err, id: RowDataPacket[]) => {
         if (err) reject(err);
-        resolve(id);
+        resolve(id[0].id);
       });
     });
   }
 
-  static create(student: string, client: client) {
+  static create(student: string, client: client): Promise<ResultSetHeader> {
     return new Promise((resolve, reject) => {
       const sql = `INSERT INTO purchase_lists(board_no, student_id) VALUES(?, ?)`;
       const params = [client.boardNum, student];
-      db.query(sql, params, (err) => {
+      db.query(sql, params, (err, data: ResultSetHeader) => {
         if (err) reject(err);
-        else resolve(true);
+        else resolve(data);
       });
     });
   }
