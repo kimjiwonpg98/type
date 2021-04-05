@@ -15,7 +15,9 @@ class SaleList {
     const studentId: string = this.body;
 
     try {
-      const saleLists: Array<any> = await SaleListStorage.findAllByStatus(studentId);
+      const saleLists: Array<any> = await SaleListStorage.findAllByStatus(
+        studentId
+      );
       if (saleLists.length !== 0)
         return {
           success: true,
