@@ -8,7 +8,10 @@ interface profile {
   email: string;
   profilePath: string;
   major: string;
+  majorNum: number;
 }
+
+type body = profile;
 
 type findEmailAndNickname = profile;
 
@@ -46,7 +49,7 @@ class ProfileStorage {
     });
   }
 
-  static updateAll(body: any, studentId: string): Promise<ResultSetHeader> {
+  static updateAll(body: body, studentId: string): Promise<ResultSetHeader> {
     return new Promise((resolve, reject) => {
       const sql = `UPDATE students st
       SET st.email = ?, st.nickname = ?, st.major_no = ?
@@ -64,7 +67,7 @@ class ProfileStorage {
   }
 
   static updateEmailAndMajor(
-    body: any,
+    body: body,
     studentId: string
   ): Promise<ResultSetHeader> {
     return new Promise((resolve, reject) => {
@@ -84,7 +87,7 @@ class ProfileStorage {
   }
 
   static updateNicknameAndMajor(
-    body: any,
+    body: body,
     studentId: string
   ): Promise<ResultSetHeader> {
     return new Promise((resolve, reject) => {

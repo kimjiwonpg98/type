@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
 import Error from "../../utils/Error";
 import ProfileStorage from "./ProfileStorage";

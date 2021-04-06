@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
 import logger from "../../config/logger";
 import Profile from "../../models/services/Profile/Profile";
