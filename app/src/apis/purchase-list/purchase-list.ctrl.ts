@@ -1,13 +1,28 @@
 import * as express from "express";
-import { RowDataPacket } from "mysql2";
 import PurchaseList from "../../models/services/PurchaseList/PurchaseList";
 
 interface response {
   success?: boolean;
   isError?: boolean;
   clientMsg?: string;
-  purchaseLists?: RowDataPacket[];
+  purchaseLists?: purchaseList[];
   errMsg?: string;
+}
+
+interface purchaseList {
+  num: number;
+  buyerId: string;
+  buyerName: string;
+  thumbnail: string;
+  title: string;
+  hit: number;
+  price: string;
+  categoryName: string;
+  commentCount: number;
+  inDate: Date;
+  sellerId: string;
+  sellerName: string;
+  profilePath: string;
 }
 
 const process = {
@@ -24,6 +39,7 @@ const process = {
     return res.status(400).json(response);
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   create: async (req: express.Request, res: express.Response): Promise<any> => {
     const purchaseList = new PurchaseList(req);
     const response: response = await purchaseList.create();

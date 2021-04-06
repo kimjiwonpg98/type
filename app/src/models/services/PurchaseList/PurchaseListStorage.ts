@@ -1,14 +1,30 @@
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import db from "../../../config/db";
 
-type client = {
+interface client {
   boardNum: number;
   nickname: string;
-};
+}
+
+interface purchaseList {
+  num: number;
+  buyerId: string;
+  buyerName: string;
+  thumbnail: string;
+  title: string;
+  hit: number;
+  price: string;
+  categoryName: string;
+  commentCount: number;
+  inDate: Date;
+  sellerId: string;
+  sellerName: string;
+  profilePath: string;
+}
 
 class PurchaseListStorage {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  static findAllById(id: string): Promise<RowDataPacket[]> {
+  static findAllById(id: string): Promise<purchaseList[]> {
     return new Promise((resolve, reject) => {
       const sql = ` SELECT bo.no AS num, pu.student_id AS buyerId, st.nickname AS buyerName, bo.thumbnail, bo.title, bo.hit, 
       bo.price, cat.name AS categoryName, COUNT(cmt.content) AS commentCount
@@ -29,8 +45,11 @@ class PurchaseListStorage {
           ORDER BY pu.no DESC`;
 
       db.query(sql, [id], function (err, purchaseList: RowDataPacket[]) {
+        const purchaseLists: purchaseList[] = Object.values(
+          JSON.parse(JSON.stringify(purchaseList))
+        );
         if (err) reject(err);
-        else resolve(purchaseList);
+        else resolve(purchaseLists);
       });
     });
   }
@@ -60,6 +79,7 @@ class PurchaseListStorage {
 
       db.query(sql, [client.nickname], (err, id: RowDataPacket[]) => {
         if (err) reject(err);
+        if (!id[0]) return reject(new Error("typeError"));
         resolve(id[0].id);
       });
     });

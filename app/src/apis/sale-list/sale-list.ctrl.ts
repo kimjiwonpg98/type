@@ -1,7 +1,7 @@
 import * as express from "express";
 import SaleList from "../../models/services/SaleList/SaleList";
 
-interface saleLists {
+interface saleList {
   num: number;
   sellerName: string;
   profilePath: string;
@@ -18,7 +18,7 @@ interface response {
   success?: boolean;
   isError?: boolean;
   clientMsg?: string;
-  saleLists?: saleLists[];
+  saleLists?: saleList[];
   errMsg?: string;
 }
 

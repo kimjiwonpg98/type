@@ -1,5 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
-import { RowDataPacket } from "mysql2";
 import Error from "../../utils/Error";
 import PurchaseListStorage from "./PurchaseListStorage";
 
@@ -12,7 +12,23 @@ interface error {
 interface response {
   success: boolean;
   msg: string;
-  purchaseList?: RowDataPacket[];
+  purchaseList?: purchaseList[];
+}
+
+interface purchaseList {
+  num: number;
+  buyerId: string;
+  buyerName: string;
+  thumbnail: string;
+  title: string;
+  hit: number;
+  price: string;
+  categoryName: string;
+  commentCount: number;
+  inDate: Date;
+  sellerId: string;
+  sellerName: string;
+  profilePath: string;
 }
 
 class PurchaseList {
@@ -41,7 +57,7 @@ class PurchaseList {
     const client = this.body;
     try {
       const isExist = await PurchaseListStorage.isExist(client);
-      if (isExist.length !== 0) {
+      if (isExist.length === 0) {
         const student = await PurchaseListStorage.findNicknameById(client);
         const response = await PurchaseListStorage.create(student, client);
         if (response)
@@ -49,7 +65,7 @@ class PurchaseList {
       }
       return { success: false, msg: "이미 구매목록에 저장이 되었습니다." };
     } catch (err) {
-      return Error.ctrl("서버 개발자에게 문의해주십시오", err);
+      return Error.ctrl("존재하지 않는 게시판 혹은 이름입니다.", err);
     }
   }
 }

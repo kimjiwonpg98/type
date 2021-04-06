@@ -1,11 +1,7 @@
 import { RowDataPacket } from "mysql2";
 import db from "../../../config/db";
 
-interface Test {
-  TextRow: saleLists;
-}
-
-interface saleLists {
+interface saleList {
   num: number;
   sellerId: string;
   sellerName: string;
@@ -20,7 +16,7 @@ interface saleLists {
 }
 
 class SaleListStorage {
-  static findAllByStatus(id: string): Promise<Test[]> {
+  static findAllByStatus(id: string): Promise<saleList[]> {
     return new Promise((resolve, reject) => {
       const sql = `SELECT bo.no AS num, bo.student_id AS sellerId, st.nickname AS sellerName, st.profile_path AS profilePath, 
       bo.thumbnail, bo.title, bo.hit, 
@@ -37,7 +33,10 @@ class SaleListStorage {
       GROUP BY bo.no
       ORDER BY bo.no desc`;
 
-      db.query(sql, [id], function (err, saleLists: RowDataPacket[]) {
+      db.query(sql, [id], function (err, saleList: RowDataPacket[]) {
+        const saleLists: saleList[] = Object.values(
+          JSON.parse(JSON.stringify(saleList))
+        );
         if (err) reject(err);
         else resolve(saleLists);
       });
