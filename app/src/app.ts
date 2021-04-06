@@ -17,10 +17,12 @@ app.use(
 
 import sale from "./apis/sale-list";
 import purchase from "./apis/purchase-list";
+import watchlist from "./apis/watch-list";
 import profile from "./apis/profile";
 
 app.use("/api/sale-list", sale);
 app.use("/api/purchase-list", purchase);
+app.use("/api/watchlist", watchlist);
 app.use("/api/students", profile);
 
 export default app;
