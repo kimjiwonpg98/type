@@ -28,8 +28,10 @@ interface purchaseList {
 }
 
 const process = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  read: async (req: express.Request, res: express.Response): Promise<any> => {
+  read: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const student = new PurchaseList(req);
     const response: response = await student.read();
     if (response.isError) {
@@ -45,8 +47,10 @@ const process = {
     return res.status(400).json(response);
   },
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  create: async (req: express.Request, res: express.Response): Promise<any> => {
+  create: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const purchaseList = new PurchaseList(req);
     const response: response = await purchaseList.create();
     if (response.isError) {

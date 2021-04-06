@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
 import logger from "../../config/logger";
 import Profile from "../../models/services/Profile/Profile";
@@ -16,7 +15,7 @@ const process = {
   findOneById: async (
     req: express.Request,
     res: express.Response
-  ): Promise<any> => {
+  ): Promise<express.Response> => {
     const profile = await new Profile(req);
     const response: response = await profile.findOneById();
     if (response.isError) {
@@ -31,7 +30,10 @@ const process = {
     return res.status(400).json(response);
   },
 
-  update: async (req: express.Request, res: express.Response): Promise<any> => {
+  update: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const profile = await new Profile(req);
     const response: response = await profile.update();
     if (response.isError) {
@@ -49,7 +51,7 @@ const process = {
   updateImage: async (
     req: express.Request,
     res: express.Response
-  ): Promise<any> => {
+  ): Promise<express.Response> => {
     const profile = await new Profile(req);
     const response: response | undefined = await profile.updateImage();
     if (response.isError) {

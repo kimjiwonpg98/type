@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
 import logger from "../../config/logger";
 import WatchList from "../../models/services/WatchList/WatchList";
@@ -31,7 +30,7 @@ const process = {
   findAllByStudentId: async (
     req: express.Request,
     res: express.Response
-  ): Promise<any> => {
+  ): Promise<express.Response> => {
     const watchList = new WatchList(req);
     const response: response = await watchList.findAllByStudentId();
     if (response.isError) {
@@ -46,7 +45,10 @@ const process = {
     return res.status(409).json(response);
   },
 
-  update: async (req: express.Request, res: express.Response): Promise<any> => {
+  update: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const watchList = new WatchList(req);
     const response: response = await watchList.update();
     if (response.isError) {
@@ -61,7 +63,10 @@ const process = {
     return res.status(409).json(response);
   },
 
-  delete: async (req: express.Request, res: express.Response): Promise<any> => {
+  delete: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const watchList = new WatchList(req);
     const response: response = await watchList.delete();
     if (response.isError) {

@@ -26,7 +26,10 @@ interface response {
 
 const process = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  read: async (req: express.Request, res: express.Response): Promise<any> => {
+  read: async (
+    req: express.Request,
+    res: express.Response
+  ): Promise<express.Response> => {
     const student = new SaleList(req);
     const response: response = await student.read();
     if (response.isError) {
