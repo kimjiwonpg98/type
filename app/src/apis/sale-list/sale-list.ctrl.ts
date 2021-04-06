@@ -1,4 +1,5 @@
 import * as express from "express";
+import logger from "../../config/logger";
 import SaleList from "../../models/services/SaleList/SaleList";
 
 interface saleList {
@@ -20,6 +21,7 @@ interface response {
   clientMsg?: string;
   saleLists?: saleList[];
   errMsg?: string;
+  msg?: string;
 }
 
 const process = {
@@ -28,11 +30,14 @@ const process = {
     const student = new SaleList(req);
     const response: response = await student.read();
     if (response.isError) {
+      logger.error(`GET /api/sale-list 400 ${response.errMsg}`);
       return res.status(400).json(response.clientMsg);
     }
     if (response.success) {
+      logger.info(`GET /api/sale-list/studentId 200 ${response.msg}`);
       return res.status(200).json(response);
     }
+    logger.error(`GET /api/sale-list/studentId 400 ${response.msg}`);
     return res.status(400).json(response);
   },
 };
