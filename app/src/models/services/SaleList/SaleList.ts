@@ -2,6 +2,7 @@
 import * as express from "express";
 import SaleListStorage from "./SaleListStorage";
 import Error from "../../utils/Error";
+import { params } from "../../../config/types";
 
 interface saleLists {
   num: number;
@@ -29,7 +30,7 @@ interface response {
 }
 
 class SaleList {
-  params: any;
+  params: params;
   constructor(readonly req: express.Request) {
     this.params = req.params;
   }

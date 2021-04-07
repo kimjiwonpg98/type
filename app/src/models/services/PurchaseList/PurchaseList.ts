@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
+import { params } from "../../../config/types";
 import Error from "../../utils/Error";
 import PurchaseListStorage from "./PurchaseListStorage";
 
@@ -32,7 +33,7 @@ interface purchaseList {
 }
 
 class PurchaseList {
-  params: any;
+  params: params;
   body: any;
   constructor(readonly req: express.Request) {
     this.body = req.body;

@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
+import { params } from "../../../config/types";
 import Error from "../../utils/Error";
 import WatchListStorage from "./WatchLIstStorage";
 
@@ -32,7 +33,7 @@ interface error {
 
 class WatchList {
   body: any;
-  params: any;
+  params: params;
   constructor(req: express.Request) {
     this.params = req.params;
     this.body = req.body;

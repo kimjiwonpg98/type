@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as express from "express";
+import { params } from "../../../config/types";
 import Error from "../../utils/Error";
 import ProfileStorage from "./ProfileStorage";
 
@@ -36,7 +37,7 @@ interface updateResponse {
 }
 
 class Profile {
-  params: any;
+  params: params;
   body: any;
   constructor(readonly req: express.Request) {
     this.params = req.params;
