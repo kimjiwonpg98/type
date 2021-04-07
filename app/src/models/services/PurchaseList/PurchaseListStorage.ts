@@ -44,7 +44,7 @@ class PurchaseListStorage {
           GROUP BY pu.no
           ORDER BY pu.no DESC`;
 
-      db.query(sql, [id], function (err, purchaseList: RowDataPacket[]) {
+      db.query(sql, [id], (err, purchaseList: RowDataPacket[]) => {
         const purchaseLists: purchaseList[] = Object.values(
           JSON.parse(JSON.stringify(purchaseList))
         );

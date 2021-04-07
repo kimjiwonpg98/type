@@ -2,12 +2,14 @@ import * as express from "express";
 import * as cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
 import * as morgan from "morgan";
+import * as cors from "cors";
 import logger from "./config/logger";
 
 const app: express.Application = express();
 dotenv.config();
 
 app.use(express.static(`${__dirname}/src/public`));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -19,10 +21,12 @@ import sale from "./apis/sale-list";
 import purchase from "./apis/purchase-list";
 import watchlist from "./apis/watch-list";
 import profile from "./apis/profile";
+import image from "./apis/image";
 
 app.use("/api/sale-list", sale);
 app.use("/api/purchase-list", purchase);
 app.use("/api/watchlist", watchlist);
 app.use("/api/students", profile);
+app.use("/api/image", image);
 
 export default app;
