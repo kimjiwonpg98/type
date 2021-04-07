@@ -23,7 +23,7 @@ const process = {
       return res.status(400).json(response.clientMsg);
     }
     if (response.success) {
-      logger.info(`GET /api/students/studentId 200 ${response}`);
+      logger.info(`GET /api/students/studentId 200 ${response.msg}`);
       return res.status(200).json(response);
     }
     logger.error(`GET /api/students/studentId 400 ${response.msg}`);
